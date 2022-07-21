@@ -6,6 +6,7 @@
 - copy `.env.example` to `.env` and configure variables if necessary
 - `docker-compose up -d`
 - `docker-compose exec app composer i`
+- you can run tests with `docker-compose exec app ./vendor/bin/pest`
 
 ## Project description:
 
