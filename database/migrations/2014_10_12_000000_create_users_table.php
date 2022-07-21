@@ -20,7 +20,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->unsignedBigInteger('coins')->nullable()->default(0);
+            $table->unsignedBigInteger('coins')
+                ->index()
+                ->nullable()
+                ->default(0);
             $table->timestamp('last_posted_at')->nullable();
             $table->timestamps();
         });

@@ -18,15 +18,14 @@ A simple job board where users can post their jobs and send a response to other 
 
 - User - user, a default User model, shipped by Laravel framework.
 - job vacancy - a model containing a title and description of the vacancy.
-- Response - a model for job vacancy responses.
 
 ### Basic system methods:
 
+ - Every user can accumulate up to 5 coins.
+ - Every user gets new coins every 24 hours. (The amount of cash should be configurable).
  - Any user can post a new job vacancy. 
+ - Any user can send a response to job vacancies posted by other users.
  - A user cannot post more than two job vacancies per 24 hours. 
- - Any user can send a response to job vacancies posted by other users. 
- - Every user can accumulate up to 5 coins. 
- - Every user gets new coins every 24 hours. (The amount of cash should be configurable). 
  - Users cannot send two or more responses to the same job vacancy. 
  - A user can like a job vacancy or another user. 
  - To post a job vacancy, a user has to pay two coins and send a response one coin.
