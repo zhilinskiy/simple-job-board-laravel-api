@@ -1,0 +1,57 @@
+version: "3.7"
+
+services:
+    app:
+        build:
+            args:
+                user: ${DOCKER_USER:-1000}
+                uid: ${DOCKER_UID:-1001}
+            context: ./
+            dockerfile: .docker/Dockerfile
+        environment:
+            DB_USERNAME: root
+            DB_PASSWORD: secret
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        container_name: job-board-app-container
+        restart: 'no'
+        working_dir: /var/www
+        tty: true
+        depends_on:
+            - db
+        volumes:
+            - ./:/var/www
+    server:
+        container_name: job-board-server
+        image: nginx:1.23.1-alpine
+        tty: true
+        restart: 'no'
+        ports:
+            - "${HTTP_PORT:-80}:80"
+        depends_on:
+            - app
+        volumes:
+            - ./:/var/www
+            - .docker/default.conf:/etc/nginx/conf.d/default.conf
+
+    db:
+        image: mysql:8.0.29
+        container_name: job-board-db
+        command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        restart: 'no'
+        tty: true
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE:-"job-board"}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-secret}
+            MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
+            MYSQL_USER: ${DB_USERNAME:-"job-board"}
+        ports:
+            - "${DOCKER_DB_EXPOSED_PORT:-3306}:3306"
+
+#    npm:
+#      image: node:15-alpine
+#      container_name: ${DOCKER_IMAGE_NAME}-npm
+#      volumes:
+#        - ./:/var/www/html
+#      working_dir: /var/www/html
+#      command: [sh, -c, "yarn install && npm run watch-poll"]
