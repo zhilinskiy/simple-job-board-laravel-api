@@ -1,5 +1,12 @@
 # PHP Developer Position (Laravel)
 
+## Installation
+- `git@github.com:zhilinskiy/simple-job-board-laravel-api.git`
+- configure env variables in `docker-compose.yaml` if necessary
+- copy `.env.example` to `.env` and configure variables if necessary
+- `docker-compose up -d`
+- `docker-compose exec app composer i`
+
 ## Project description:
 
 A simple job board where users can post their jobs and send a response to other jobs.
@@ -48,9 +55,3 @@ We expect to see the following models:
 - Authorization via Laravel Passport, Laravel Sanctum or JWT
 - Upload each milestone to your public GitHub account so that we can see the application's progress.
 - Docker ready
-
-## Installation
-- `git@github.com:zhilinskiy/simple-job-board-laravel-api.git`
-- configure env variables in `docker-compose.yaml` if necessary
-- `docker-compose up -d`
-- `docker-compose exec app composer i`
