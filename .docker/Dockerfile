@@ -1,6 +1,4 @@
-FROM composer:2.3.9 AS composer
 FROM php:8.1.5-fpm-bullseye
-COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update; \
     apt-get install --yes --quiet --no-install-recommends \
@@ -35,10 +33,10 @@ RUN apt-get update; \
 
 COPY .docker/local.ini /usr/local/etc/php/conf.d/zzz_app.ini
 
-ARG user
-ARG uid
-RUN useradd -G www-data,root -u $uid -d /home/$user $user && echo "$user:$user" | chpasswd && adduser $user sudo
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
-USER $user
-CMD ["php-fpm"]
+#ARG user
+#ARG uid
+#RUN useradd -G www-data,root -u $uid -d /home/$user $user && echo "$user:$user" | chpasswd && adduser $user sudo
+#RUN mkdir -p /home/$user/.composer && \
+#    chown -R $user:$user /home/$user
+#USER $user
+#CMD ["php-fpm"]

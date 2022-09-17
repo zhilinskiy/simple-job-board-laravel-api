@@ -5,8 +5,9 @@
 - configure env variables in `docker-compose.yaml` if necessary
 - copy `.env.example` to `.env` and configure variables if necessary
 - `docker-compose up -d`
-- `docker-compose exec app composer i`
-- you can run tests with `docker-compose exec app ./vendor/bin/pest`
+- install packages `docker-compose run --rm composer i`
+- generate app key `docker-compose exec app php artisan key:generate`
+- run tests `docker-compose exec app ./vendor/bin/pest`
 
 ## Project description:
 
